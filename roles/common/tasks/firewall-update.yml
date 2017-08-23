@@ -1,0 +1,16 @@
+---
+
+- name: uninstall iptables-services
+  yum: name=iptables-services state=absent
+
+- name: install firewalld
+  yum: name=firewalld state=present
+
+- name: firewalld running and enabled
+  service: name=firewalld state=started enabled=yes
+
+- name: allow incoming ssh traffic (firewalld)
+  firewalld: service=ssh permanent=true state=enabled
+  notify: restart firewalld
+
+...

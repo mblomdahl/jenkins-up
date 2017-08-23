@@ -1,0 +1,32 @@
+---
+
+- name: configure selinux
+  include: selinux-configuration.yml
+  tags: common, selinux
+
+- name: configure system
+  include: system-configuration.yml
+  tags: common, accounts
+
+- name: update firewall
+  include: firewall-update.yml
+  tags: common, firewall
+
+- name: install ntp
+  include: ntp-installation.yml
+  tags: common
+
+- name: install base packages
+  include: base-packages-installation.yml
+  tags: common, base-packages
+
+- name: install extra packages (epel)
+  include: extra-packages-installation.yml
+  tags: common, extra-packages
+
+- name: configure user accounts
+  include: user-configuration.yml
+  when: accounts.enabled == True or accounts.enabled == False
+  tags: common, accounts
+
+...

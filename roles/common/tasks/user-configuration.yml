@@ -1,0 +1,48 @@
+---
+
+- name: create 'centos' user
+  user:
+    name: centos
+    groups: wheel,supergroup
+    state: present
+
+- name: set ~/.ssh/authorized_keys for 'centos' user
+  assemble:
+    src: public_keys/
+    regexp: "^({{ accounts.users | join('|') }})_id_rsa.pub$"
+    dest: /home/centos/.ssh/authorized_keys
+    remote_src: False
+  become: True
+  become_user: centos
+
+- name: configure user accounts
+  user:
+    name: "{{ item }}"
+    groups: wheel,supergroup
+    state: "{% if accounts.enabled == True %}present{% else %}absent{% endif %}"
+    force: yes
+    remove: yes
+  with_items: "{{ accounts.users }}"
+
+- name: set ~/.ssh/authorized_keys for sys accounts
+  authorized_key:
+    user: "{{ item }}"
+    key: "{{ lookup('file', 'public_keys/' + item + '_id_rsa.pub') }}"
+    exclusive: yes
+  with_items: "{{ accounts.users }}"
+  when: accounts.enabled
+
+- name: add ~/.emacs config
+  lineinfile:
+    dest: /home/{{ item }}/.emacs
+    line: "(setq make-backup-files nil)"
+    create: yes
+  with_items: "{{ accounts.users }}"
+  when: accounts.enabled
+
+- name: remove ~/.ssh/authorized_keys for 'root' user
+  file:
+    path: /root/.ssh/authorized_keys
+    state: absent
+
+...

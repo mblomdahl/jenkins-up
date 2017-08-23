@@ -1,0 +1,23 @@
+---
+
+- name: install wget, man, man-pages, et cetera
+  yum: name={{ item }} state=present
+  with_items:
+    - wget
+    - git
+    - man
+    - man-pages
+    - vim-enhanced
+    - tree
+    - gcc
+    - python-devel
+
+- name: install emacs
+  yum: name=emacs state=present
+  notify: emacs config
+
+- name: install mlocate
+  yum: name=mlocate state=present
+  notify: run updatedb
+
+...

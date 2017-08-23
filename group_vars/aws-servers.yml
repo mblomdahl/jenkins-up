@@ -1,0 +1,15 @@
+---
+
+external_dmz:
+  - 82.96.2.2/32  # SMSI-STO
+  - 85.88.139.30/32  # SMSI-BRA
+  - 162.223.136.200/32  # SMSI-CI
+
+accounts:
+  enabled: True
+  users:
+    - bamboo
+    - mblomdahl
+    - vtepliuk
+
+...

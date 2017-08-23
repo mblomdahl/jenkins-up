@@ -5,6 +5,14 @@ external_dmz:
   - 85.88.139.30/32  # SMSI-BRA
   - 162.223.136.200/32  # SMSI-CI
 
+_host_ansible_devices_lookups:
+  - "{% if 'xvdb' in ansible_devices %}/dev/xvdb{% endif %}"
+  - "{% if 'xvdc' in ansible_devices %}/dev/xvdc{% endif %}"
+  - "{% if 'xvdd' in ansible_devices %}/dev/xvdd{% endif %}"
+  - "{% if 'xvde' in ansible_devices %}/dev/xvde{% endif %}"
+
+extra_volumes: "{{ _host_ansible_devices_lookups | select | list }}"
+
 accounts:
   enabled: True
   users:

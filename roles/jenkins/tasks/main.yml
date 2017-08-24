@@ -1,0 +1,11 @@
+---
+
+- name: install jenkins
+  include: installation.yml
+  tags: jenkins
+
+- name: configure jenkins
+  include: configuration.yml
+  tags: jenkins
+
+...

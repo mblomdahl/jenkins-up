@@ -1,0 +1,16 @@
+---
+
+- name: install java-1.8.0-openjdk
+  yum: name=java-1.8.0-openjdk state=present
+
+- name: add jenkins repo
+  yum_repository:
+    name: Jenkins
+    description: Jenkins
+    baseurl: https://pkg.jenkins.io/redhat/
+    gpgkey: https://pkg.jenkins.io/redhat/jenkins.io.key
+
+- name: install jenkins-2.60-1.1
+  yum: name=jenkins-2.60-1.1 state=present
+
+...

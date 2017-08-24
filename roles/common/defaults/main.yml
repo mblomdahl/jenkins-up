@@ -1,5 +1,7 @@
 ---
 
+extra_volumes: []  # E.g. ['/dev/xvdb', '/dev/xvdc']
+
 accounts:
   enabled:
   users: []

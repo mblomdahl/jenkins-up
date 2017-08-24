@@ -24,7 +24,7 @@
     remove: yes
   with_items: "{{ accounts.users }}"
 
-- name: set ~/.ssh/authorized_keys for sys accounts
+- name: set ~/.ssh/authorized_keys for user accounts
   authorized_key:
     user: "{{ item }}"
     key: "{{ lookup('file', 'public_keys/' + item + '_id_rsa.pub') }}"

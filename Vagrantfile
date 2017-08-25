@@ -77,8 +77,8 @@ Vagrant.configure("2") do |config|
     #ansible.tags = ["common"]
     #ansible.tags = ["selinux", "accounts", "firewall"]
     #ansible.tags = ["base-packages", "extra-packages"]
-    #ansible.tags = ["docker"]
     #ansible.tags = ["nodejs"]
+    #ansible.tags = ["jenkins"]
     #ansible.verbose = "v"
   end
 

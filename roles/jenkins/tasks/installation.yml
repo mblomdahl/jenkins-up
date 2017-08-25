@@ -13,4 +13,23 @@
 - name: install jenkins-2.60-1.1
   yum: name=jenkins-2.60-1.1 state=present
 
+- block:
+    - name: create /mnt/lvm/jenkins home dir
+      file:
+        path: /mnt/lvm/jenkins
+        owner: jenkins
+        group: jenkins
+        state: directory
+
+    - name: mount /mnt/lvm/jenkins as /var/lib/jenkins
+      mount:
+        name: /var/lib/jenkins
+        src: /mnt/lvm/jenkins
+        fstype: none
+        opts: bind
+        state: mounted
+        boot: no
+
+  when: extra_volumes
+
 ...

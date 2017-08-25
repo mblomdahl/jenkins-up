@@ -6,5 +6,6 @@
     - common
     - docker
     - nodejs
+    - jenkins
 
 ...

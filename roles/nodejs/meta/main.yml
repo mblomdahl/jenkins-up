@@ -1,0 +1,17 @@
+galaxy_info:
+  author: Mats Blomdahl
+  description: NodeJS 7 and NPM 5 provisioning.
+
+  license: MIT
+
+  min_ansible_version: 2.2
+
+  platforms:
+    - name: EL
+      versions:
+        - 7
+
+  galaxy_tags:
+    - nodejs
+
+dependencies: []

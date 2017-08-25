@@ -1,5 +1,8 @@
 ---
 
+- name: add 'jenkins' user to 'docker' group
+  user: name=jenkins groups=docker append=yes
+
 - name: jenkins running and enabled
   service: name=jenkins state=started enabled=yes
 

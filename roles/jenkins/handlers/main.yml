@@ -4,4 +4,7 @@
   service: name=firewalld state=restarted
   check_mode: no
 
+- name: restart jenkins
+  service: name=jenkins state=restarted
+  check_mode: no
 ...

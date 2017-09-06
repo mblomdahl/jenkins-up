@@ -1,0 +1,14 @@
+---
+
+- name: template docker daemon.json
+  lineinfile:
+    dest: /etc/docker/daemon.json
+    state: present
+    create: yes
+    line: '{"experimental": true}'
+  notify: restart docker
+
+- name: docker running and enabled
+  service: name=docker state=started enabled=yes
+
+...

@@ -1,5 +1,8 @@
 ---
 
+- name: add 'jenkins' user to 'docker' group
+  user: name=jenkins groups=docker append=yes
+
 - name: allow incoming traffic on port 8080
   firewalld: port=8080/tcp permanent=true state=enabled immediate=yes
   notify: restart firewalld

@@ -28,4 +28,56 @@
       Defaults:%wheel visiblepw
     validate: visudo -cf %s
 
+- block:
+    - name: install lvm2
+      yum: name=lvm2 state=present
+
+    - name: install xfs
+      yum: name=xfsprogs state=present
+
+    - name: umount instance store /mnt
+      mount:
+        name: /mnt
+        state: absent
+      register: mnt_umount
+
+    - name: format extra_volumes as xfs
+      filesystem:
+        fstype: xfs
+        dev: "{{ item }}"
+        force: yes
+      with_items: "{{ extra_volumes }}"
+      when: mnt_umount.changed
+
+    - name: create 'extra_volumes' volume group
+      lvg:
+        vg: extra_volumes
+        pvs: "{{ extra_volumes | join(',') }}"
+
+    - name: create 'extra_volumes' logical volume
+      lvol:
+        vg: extra_volumes
+        lv: lvm
+        size: 100%PVS
+        pvs: "{{ extra_volumes | join(',') }}"
+      register: lvol_created
+
+    - name: format 'extra_volumes' lvm as xfs
+      filesystem:
+        fstype: xfs
+        dev: /dev/extra_volumes/lvm
+        resizefs: no
+        force: yes
+      when: lvol_created.changed
+
+    - name: mount 'extra_volumes' lvm as /mnt/lvm
+      mount:
+        name: /mnt/lvm
+        fstype: xfs
+        src: /dev/extra_volumes/lvm
+        state: mounted
+        boot: no
+
+  when: extra_volumes
+
 ...

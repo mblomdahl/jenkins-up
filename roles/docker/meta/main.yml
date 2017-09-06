@@ -1,6 +1,6 @@
 galaxy_info:
-  author: Viktoriia Tepliuk
-  description: Jenkins 2.60 installation.
+  author: Mats Blomdahl
+  description: Docker host provisioning.
 
   license: MIT
 
@@ -12,8 +12,6 @@ galaxy_info:
         - 7
 
   galaxy_tags:
-    - jenkins
+    - docker
 
-dependencies:
-  - docker
-
+dependencies: []

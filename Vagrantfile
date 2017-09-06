@@ -75,6 +75,10 @@ Vagrant.configure("2") do |config|
   config.vm.provision "ansible" do |ansible|
     ansible.playbook = "jenkins-server.yml"
     #ansible.tags = ["common"]
+    #ansible.tags = ["selinux", "accounts", "firewall"]
+    #ansible.tags = ["base-packages", "extra-packages"]
+    #ansible.tags = ["nodejs"]
+    #ansible.tags = ["jenkins"]
     #ansible.verbose = "v"
   end
 

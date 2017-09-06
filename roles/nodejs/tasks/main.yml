@@ -1,0 +1,7 @@
+---
+
+- name: install nodejs 7 and npm 5
+  include: installation.yml
+  tags: nodejs
+
+...

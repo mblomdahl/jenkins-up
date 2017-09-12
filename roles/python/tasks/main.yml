@@ -1,0 +1,7 @@
+---
+
+- name: install scl, python27 and python35 and virtualenv
+  include: installation.yml
+  tags: python
+
+...

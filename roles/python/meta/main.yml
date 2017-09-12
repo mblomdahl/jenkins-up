@@ -1,0 +1,19 @@
+galaxy_info:
+  author: Mats Blomdahl
+  description: Provisioning of SCL, VirtualEnv and Python 2/3.
+
+  license: MIT
+
+  min_ansible_version: 2.2
+
+  platforms:
+    - name: EL
+      versions:
+        - 7
+
+  galaxy_tags:
+    - python
+    - scl
+    - virtualenv
+
+dependencies: []

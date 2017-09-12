@@ -1,0 +1,38 @@
+---
+
+- name: install python-virtualenv
+  yum: name=python-virtualenv state=present
+
+- name: install virtualenv-15.1.0
+  pip: name=virtualenv version=15.1.0 state=present
+
+- name: install centos-release-scl
+  yum: name=centos-release-scl state=present
+
+- name: install python27
+  yum: name=python27 state=present
+
+- name: install scl python27 pip-9.0.1
+  shell: scl enable python27 "pip install pip==9.0.1"
+  register: scl_python27_pip_install
+  changed_when: scl_python27_pip_install.stdout.find('already satisfied') == -1
+
+- name: install scl python27 virtualenv-15.1.0
+  shell: scl enable python27 "pip install virtualenv==15.1.0"
+  register: scl_python27_virtualenv_install
+  changed_when: scl_python27_virtualenv_install.stdout.find('already satisfied') == -1
+
+- name: install rh-python35
+  yum: name=rh-python35 state=present
+
+- name: install scl rh-python35 pip-9.0.1
+  shell: scl enable rh-python35 "pip install pip==9.0.1"
+  register: scl_rh_python35_pip_install
+  changed_when: scl_rh_python35_pip_install.stdout.find('already satisfied') == -1
+
+- name: install scl rh-python35 virtualenv-15.1.0
+  shell: scl enable rh-python35 "pip install virtualenv==15.1.0"
+  register: scl_rh_python35_virtualenv_install
+  changed_when: scl_rh_python35_virtualenv_install.stdout.find('already satisfied') == -1
+
+...
